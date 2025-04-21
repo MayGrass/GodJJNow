@@ -297,9 +297,9 @@ $(document).on("click", function (e) {
 });
 
 // 新增清除訊息功能
-document.getElementById("ClearMessageButton").addEventListener("click", function () {
-    chrome.storage.sync.set({ JJMessage: '{"Message":[]}' }, function () {
-        // 清除完成後重新載入頁面更新 UI
-        location.reload();
-    });
-});
+// document.getElementById("ClearMessageButton").addEventListener("click", function () {
+//     chrome.storage.sync.set({ JJMessage: '{"Message":[]}' }, function () {
+//         // 清除完成後重新載入頁面更新 UI
+//         location.reload();
+//     });
+// });

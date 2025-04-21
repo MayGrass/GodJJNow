@@ -4,11 +4,9 @@
     "description": "是一款真正的JJ套件",
     "version": "3.0.0",
     "permissions": [
-      "alarms",
       "storage",
       "notifications",
       "webNavigation",
-      "tabs",
       "offscreen"
     ],
     "host_permissions": [
