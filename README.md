@@ -1,14 +1,14 @@
 # JJner aka JJㄋ
 
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/blinlknnpdpmchjdimpiiinbamgbnbmd)](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd?hl=zh-TW)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/blinlknnpdpmchjdimpiiinbamgbnbmd)]()
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/blinlknnpdpmchjdimpiiinbamgbnbmd?label=chrome%20web%20store)]()
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/lkkafdaealbadpalmjahfkccfcejhpnl)](https://chrome.google.com/webstore/detail/godjj-now/lkkafdaealbadpalmjahfkccfcejhpnl?hl=zh-TW)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/lkkafdaealbadpalmjahfkccfcejhpnl)]()
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/lkkafdaealbadpalmjahfkccfcejhpnl?label=chrome%20web%20store)]()
 
 方便大家及時了解GodJJ跑去哪邊
 
 ### 線上版本
 
-- [Chrome版本](https://chrome.google.com/webstore/detail/godjj-now/blinlknnpdpmchjdimpiiinbamgbnbmd)
+- [Chrome版本](https://chrome.google.com/webstore/detail/godjj-now/lkkafdaealbadpalmjahfkccfcejhpnl)
 - [GitHub](https://github.com/MayGrass/JJner)
 
 ### 目前包含
