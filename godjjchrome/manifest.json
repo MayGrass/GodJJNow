@@ -1,43 +1,43 @@
 {
-    "manifest_version": 3,
-    "name": "JJner",
-    "description": "是一款真正的JJ套件",
-    "version": "3.0.1",
-    "permissions": [
-      "storage",
-      "notifications",
-      "webNavigation",
-      "offscreen"
-    ],
-    "host_permissions": [
-      "*://*.twitch.tv/*"
-    ],
-    "options_ui":
-    {
-        "page": "options.html"
-    },
-    "content_scripts": [
-        {
-          "matches": ["*://*.twitch.tv/*"],
-          "js": ["js/arrive.js", "js/points-clicker.js"],
-          "run_at" : "document_idle"
-        }
-    ],
-    "background":
-    {
-        "service_worker": "js/background.js",
-        "type": "module"
-    },
-    "action":
-    {
-        "default_title": "點我查詢GodJJ",
-        "default_icon": "img/jrobot.png",
-        "default_popup": "popup.html"
-    },
-    "icons":
-    {
-        "16": "icon16.png",
-        "48": "icon48.png",
-        "128": "icon128.png"
-    }
+  "manifest_version": 3,
+  "name": "JJner",
+  "description": "一款為J粉而生的套件",
+  "version": "3.1.1",
+  "permissions": [
+    "storage",
+    "notifications",
+    "webNavigation",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "*://*.twitch.tv/*"
+  ],
+  "options_ui":
+  {
+      "page": "options.html"
+  },
+  "content_scripts": [
+      {
+        "matches": ["*://*.twitch.tv/*"],
+        "js": ["js/arrive.js", "js/points-clicker.js", "js/raid-auto-return.js"],
+        "run_at" : "document_idle"
+      }
+  ],
+  "background":
+  {
+      "service_worker": "js/background.js",
+      "type": "module"
+  },
+  "action":
+  {
+      "default_title": "點我查詢GodJJ",
+      "default_icon": "img/jrobot.png",
+      "default_popup": "popup.html"
+  },
+  "icons":
+  {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+  }
 }

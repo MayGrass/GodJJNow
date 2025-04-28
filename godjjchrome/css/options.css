@@ -1,0 +1,36 @@
+body {
+    padding: 10px;
+}
+
+.channel-input {
+    margin-bottom: 10px;
+}
+
+.channel-list {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.channel-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.delete-btn {
+    color: red;
+    cursor: pointer;
+}
+
+.option-group {
+    margin-bottom: 10px;
+}
+
+.sub-option {
+    margin-left: 25px;
+    margin-top: 5px;
+}

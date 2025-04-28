@@ -1,0 +1,30 @@
+body {
+    font-family: "微軟雅黑體", "蘋方-繁", "Microsoft JhengHei", "標楷體", DFKai-SB, sans-serif;
+    font-size: 1.8rem;
+    margin-top: 10px;
+}
+
+.update-notes {
+    background-color: #f8f9fa;
+    border-left: 3px solid #6c757d;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 4px;
+}
+
+.note-header {
+    color: #495057;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.note-content {
+    color: #6c757d;
+    font-style: italic;
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.note-content:last-child {
+    margin-bottom: 0;
+}

@@ -111,11 +111,24 @@ function notifyChannelsUpdate(channels) {
     });
 }
 
+// 自動回家選項相關
+function toggleAutoReturnOptions() {
+    const enabled = document.getElementById("autoReturnEnabled").checked;
+    // 子選項要根據主選項的狀態來啟用或禁用
+    document.getElementById("autoReturnModeJJOnly").disabled = !enabled;
+    document.getElementById("autoReturnModeAll").disabled = !enabled;
+}
+
 //將設置用chrome.storage.sync儲存
 function save_options() {
     var getChatNotification = document.getElementById("getChatNotification").checked;
+    var autoReturnEnabled = document.getElementById("autoReturnEnabled").checked;
+    var autoReturnMode = document.querySelector('input[name="autoReturnMode"]:checked').value;
+
     chrome.storage.sync.set({
-        getChatNotification: getChatNotification
+        getChatNotification: getChatNotification,
+        autoReturnEnabled: autoReturnEnabled,
+        autoReturnMode: autoReturnMode
     }, function () {
         //提供儲存成功的提示
         var status = document.getElementById("status");
@@ -137,9 +150,21 @@ function restore_options() {
     //利用get設定預設值並，無值即取得預設置，有值則使用之前儲存的值
     chrome.storage.sync.get({
         getChatNotification: true,
-        monitoredChannels: DEFAULT_CHANNELS
+        monitoredChannels: DEFAULT_CHANNELS,
+        autoReturnEnabled: false,
+        autoReturnMode: 'jjOnly'
     }, function (items) {
-        document.getElementById("getChatNotification").checked = items.getChatNotification;
+        document.getElementById("getChatNotification").checked = items.getChatNotification; // 通知
+        document.getElementById("autoReturnEnabled").checked = items.autoReturnEnabled; // 自動回家
+
+        // 設定自動回家模式
+        if (items.autoReturnMode === 'jjOnly') {
+            document.getElementById("autoReturnModeJJOnly").checked = true;
+        } else {
+            document.getElementById("autoReturnModeAll").checked = true;
+        }
+
+        toggleAutoReturnOptions();
         renderChannelList(items.monitoredChannels);
     });
 }
@@ -153,3 +178,4 @@ document.getElementById("newChannel").addEventListener("keypress", function (eve
         addNewChannel();
     }
 });
+document.getElementById("autoReturnEnabled").addEventListener("change", toggleAutoReturnOptions);

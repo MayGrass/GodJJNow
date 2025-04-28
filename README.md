@@ -1,12 +1,12 @@
 # JJner aka JJㄋ
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/lkkafdaealbadpalmjahfkccfcejhpnl)](https://chrome.google.com/webstore/detail/godjj-now/lkkafdaealbadpalmjahfkccfcejhpnl?hl=zh-TW)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/lkkafdaealbadpalmjahfkccfcejhpnl)]()
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/lkkafdaealbadpalmjahfkccfcejhpnl?label=chrome%20web%20store)]()
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/lkkafdaealbadpalmjahfkccfcejhpnl)](https://chrome.google.com/webstore/detail/godjj-now/lkkafdaealbadpalmjahfkccfcejhpnl?hl=zh-TW)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/lkkafdaealbadpalmjahfkccfcejhpnl?label=chrome%20web%20store)](https://chromewebstore.google.com/detail/jjner/lkkafdaealbadpalmjahfkccfcejhpnl/reviews?hl=zh-TW)
 
-方便大家及時了解GodJJ跑去哪邊
+方便大家及時了解GodJJ出現在哪台
 
-### 線上版本
+## 線上版本
 
 - [Chrome版本](https://chrome.google.com/webstore/detail/godjj-now/lkkafdaealbadpalmjahfkccfcejhpnl)
 - [GitHub](https://github.com/MayGrass/JJner)
@@ -17,6 +17,8 @@
 - JJ留言紀錄
 - 自訂新增抓哪台的JJ留言
 - 自動點擊"國王的金幣"額外獎勵，其它台同時也通用
+- 揪團後自動返回原實況台
+- JJ News跑馬燈自動更新YT最新影片
 - ~~LoL戰績摘要~~(功能壞光光3.0.0版本已移除)
 - ~~圖奇開台通知(含GodJJ鈴聲)~~ (2.3.2版移除此功能)
 
@@ -42,6 +44,11 @@
 - Notification icon made by Darius Dan from <www.flaticon.com>, licensed under CC BY 3.0
 
 ### 更新資訊
+
+#### 3.1.0
+
+- 新增自動回家功能，糾團後自動返回原實況台
+  - 預設關閉，有需要的話可以在設定頁面開啟
 
 #### 3.0.1
 

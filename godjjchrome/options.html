@@ -3,42 +3,32 @@
 
 <head>
     <title>選項</title>
-    <style>
-        body {
-            padding: 10px;
-        }
-
-        .channel-input {
-            margin-bottom: 10px;
-        }
-
-        .channel-list {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 5px;
-        }
-
-        .channel-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-        }
-
-        .delete-btn {
-            color: red;
-            cursor: pointer;
-        }
-    </style>
     <script type="module" src="options.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/options.css">
 </head>
 
 <body>
-    <label>
-        <input type="checkbox" id="getChatNotification"> 是否開啟聊天室通知
-    </label>
+    <div class="option-group">
+        <label>
+            <input type="checkbox" id="getChatNotification"> 開啟聊天室通知
+        </label>
+    </div>
+
+    <div class="option-group">
+        <label>
+            <input type="checkbox" id="autoReturnEnabled"> 啟用自動回家功能 (糾團後自動返回原實況台)
+        </label>
+
+        <div class="sub-option">
+            <label>
+                <input type="radio" name="autoReturnMode" id="autoReturnModeJJOnly" value="jjOnly"> 僅限 GodJJ 台
+            </label>
+            <br>
+            <label>
+                <input type="radio" name="autoReturnMode" id="autoReturnModeAll" value="all"> 所有實況台
+            </label>
+        </div>
+    </div>
     <p></p>
 
     <h3>實況台管理</h3>
