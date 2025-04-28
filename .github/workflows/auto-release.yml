@@ -12,30 +12,46 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
       - name: Get tag name
         id: get_tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        run: echo "TAG=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
       
       - name: Get Changelog Entry
         id: changelog_reader
         uses: mindsers/changelog-reader-action@v2
         with:
           version: ${{ steps.get_tag.outputs.TAG }}
-          path: ./CHANGELOG.md
+          path: ./README.md
         continue-on-error: true
       
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.get_tag.outputs.TAG }}
-          name: Release ${{ steps.get_tag.outputs.TAG }}
+          name: ${{ steps.get_tag.outputs.TAG }}
           body: ${{ steps.changelog_reader.outputs.changes || format('Release of version {0}', steps.get_tag.outputs.TAG) }}
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 打包擴充套件
+      - name: Package Extension
+        run: |
+          mkdir -p build
+          cp -r godjjchrome/* build/
+          cd build
+          zip -r ../extension.zip *
+      
+      # 自動上傳到 Chrome Web Store並發布
+      - name: Publish to Chrome Web Store
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: extension.zip
+          extension-id: lkkafdaealbadpalmjahfkccfcejhpnl
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
