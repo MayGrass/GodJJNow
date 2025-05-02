@@ -1,4 +1,4 @@
-name: Auto Release
+name: Create GitHub Release
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
         uses: mindsers/changelog-reader-action@v2
         with:
           version: ${{ steps.get_tag.outputs.TAG }}
-          path: ./README.md
+          path: ./CHANGELOG.md
         continue-on-error: true
       
       - name: Create Release
@@ -37,21 +37,3 @@ jobs:
           body: ${{ steps.changelog_reader.outputs.changes || format('Release of version {0}', steps.get_tag.outputs.TAG) }}
           draft: false
           prerelease: false
-
-      # 打包擴充套件
-      - name: Package Extension
-        run: |
-          mkdir -p build
-          cp -r godjjchrome/* build/
-          cd build
-          zip -r ../extension.zip *
-      
-      # 自動上傳到 Chrome Web Store並發布
-      - name: Publish to Chrome Web Store
-        uses: mnao305/chrome-extension-upload@v5.0.0
-        with:
-          file-path: extension.zip
-          extension-id: lkkafdaealbadpalmjahfkccfcejhpnl
-          client-id: ${{ secrets.CHROME_CLIENT_ID }}
-          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
-          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}

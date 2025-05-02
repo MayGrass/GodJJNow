@@ -1,0 +1,33 @@
+name: Publish to Chrome Web Store
+
+on:
+  push:
+    tags:
+      - 'v*' # 當推送的 tag 格式為 v1.0.0 等形式時觸發
+
+jobs:
+  publish:
+    name: Package and Publish Extension
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # 打包擴充套件
+      - name: Package Extension
+        run: |
+          mkdir -p build
+          cp -r godjjchrome/* build/
+          cd build
+          zip -r ../extension.zip *
+      
+      # 自動上傳到 Chrome Web Store並發布
+      - name: Publish to Chrome Web Store
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        with:
+          file-path: extension.zip
+          extension-id: lkkafdaealbadpalmjahfkccfcejhpnl
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
