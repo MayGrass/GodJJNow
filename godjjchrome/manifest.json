@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "JJner",
   "description": "一款為J粉而生的套件",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "permissions": [
     "storage",
     "notifications",

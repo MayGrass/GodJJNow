@@ -62,3 +62,14 @@ td {
     max-width: 300px;
     word-wrap: break-word;
 }
+
+.copy-icon {
+    width: 15px;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.channel-badge {
+    background-color: #6441A4;
+    cursor: pointer;
+}

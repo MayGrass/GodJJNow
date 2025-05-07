@@ -1,7 +1,17 @@
 [
   {
-    "version": "3.1.1",
+    "version": "3.1.2",
     "checked": true,
+    "changes": [
+      "Message頁面的Channel欄位新增點擊後開啟實況台的功能"
+    ],
+    "notes": [
+      "第一時間消息通知沒點到前往實況台就沒辦法過去了，所以才加一個超連結在Channel那邊，就不用特別找台了"
+    ]
+  },
+  {
+    "version": "3.1.1",
+    "checked": false,
     "changes": [
       "修復自動回家功能偶爾會不觸發的問題"
     ],

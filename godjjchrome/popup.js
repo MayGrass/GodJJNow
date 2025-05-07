@@ -12,7 +12,7 @@
     buttonMap.forEach((buttonUrl, buttonName) => {
         var button = document.getElementById(buttonName);
         button.setAttribute("data-content", buttonUrl);
-        button.addEventListener("click", function (ce) {
+        button.addEventListener("click", function () {
             chrome.tabs.create({ "url": this.getAttribute("data-content") });
         });
     });
@@ -106,12 +106,9 @@ chrome.storage.sync.get({
         indexSpan.innerText = (i + 1);
 
         var copyIcon = document.createElement("img");
-        copyIcon.src = "/img/copy_icon.png"; // 假設已有或將添加此圖標
-        copyIcon.style.width = "15px";
-        copyIcon.style.marginLeft = "3px";
-        copyIcon.style.cursor = "pointer";
+        copyIcon.src = "/img/copy_icon.png";
+        copyIcon.className = "copy-btn copy-icon";
         copyIcon.title = "複製此則訊息";
-        copyIcon.className = "copy-btn";
 
         // 儲存訊息相關資料用於複製
         copyIcon.dataset.channel = value.channel;
@@ -127,26 +124,38 @@ chrome.storage.sync.get({
         tdTime.className = "text-center";
         tdTime.innerText = key;
 
-        channelInfo = value.channel;
-        streamerInfo = value.streamer;
-        messageContent = value.message;
+        // 使用區域變數替代全域變數
+        const localChannelInfo = value.channel;
+        const localStreamerInfo = value.streamer;
+        const localMessageContent = value.message;
 
         // 建立實況台欄
         var tdChannel = document.createElement("td");
         tdChannel.className = "text-center";
-        tdChannel.innerHTML = "<span class='badge' style='background-color: #6441A4;'>" + channelInfo + "</span>";
+
+        // 將實況台欄位為可點擊的超連結
+        var channelLink = document.createElement("a");
+        channelLink.innerHTML = "<span class='badge channel-badge'>" + localChannelInfo + "</span>";
+        // 保存處理後的頻道名稱用於URL
+        const channelId = localChannelInfo.replace("#", ""); // 實況台ID要去掉#
+        channelLink.title = "前往 " + channelId + " 實況台"; // 提示訊息
+        channelLink.addEventListener("click", function (e) {
+            e.preventDefault(); // 防止預設行為
+            chrome.tabs.create({ "url": "https://www.twitch.tv/" + channelId });
+        });
+        tdChannel.appendChild(channelLink);
 
         // 建立實況台主欄
         var tdStreamer = document.createElement("td");
         tdStreamer.className = "text-center";
-        tdStreamer.innerText = streamerInfo;
+        tdStreamer.innerText = localStreamerInfo;
 
         // 建立訊息欄
         var tdMsg = document.createElement("td");
         tdMsg.className = "text-center message-cell";
 
         // 統一處理訊息顯示邏輯
-        processMessageCell(tdMsg, messageContent);
+        processMessageCell(tdMsg, localMessageContent);
 
         tr.appendChild(tdIndex);
         tr.appendChild(tdTime);
@@ -174,19 +183,19 @@ function processMessageCell(cell, content) {
     // 檢查訊息是否包含URL
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const containsUrl = urlRegex.test(content);
-    const needsExpansion = content.length > 12;
+    const maxLength = 16; // 字數大於多少才需要做收合
+    const needsExpansion = content.length > maxLength;
 
     // 如果訊息需要展開機制（長訊息或包含URL）
     if (needsExpansion || containsUrl) {
         // 創建縮略訊息元素
         var shortMsg = document.createElement("span");
         shortMsg.className = "short-message";
-        shortMsg.innerText = content.substring(0, 12) + " ...";
+        shortMsg.innerText = content.substring(0, maxLength) + " ...";
 
         // 創建完整訊息元素
         var fullMsg = document.createElement("span");
         fullMsg.className = "full-message";
-        fullMsg.style.display = "none";
 
         // 如果包含URL，將URL轉換為可點擊連結
         if (containsUrl) {
