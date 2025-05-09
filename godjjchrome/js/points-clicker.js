@@ -2,14 +2,14 @@ function clickPointsButton() {
     try {
         // Get all clickable buttons and click button!
         var elems = document.querySelector('.community-points-summary').querySelectorAll('button');
-        elems.forEach(function(currentElem, index, arr) {
+        elems.forEach(function (currentElem, index, arr) {
             if (index != 0) {
                 currentElem.click();
                 console.log('Clicked points button!, Time: ' + new Date());
             }
         });
     }
-    catch(err) {}
+    catch (err) { }
 }
 
 // Retry 6 times, total try 1 min (6 * 10s(setTimeout))
@@ -18,11 +18,11 @@ const RETRY_NUM = 6;
 function initialize(retry) {
     // Initialized check
     function check() {
-        var promise = new Promise(function(resolve, reject) {
-            setTimeout(function() {
+        var promise = new Promise(function (resolve, reject) {
+            setTimeout(function () {
                 console.log('Initialized!');
                 Arrive.unbindAllArrive();
-            
+
                 if (document.body.contains(document.getElementsByClassName('community-points-summary')[0])) {
                     console.log('In channel page');
                     // Pre-click
@@ -41,9 +41,9 @@ function initialize(retry) {
         });
         return promise;
     }
-     
-    check().then(function(retry_message) {
-        if (retry_message < RETRY_NUM){
+
+    check().then(function (retry_message) {
+        if (retry_message < RETRY_NUM) {
             // Retry initialize, because sometimes the page load will be delayed
             console.log('retry ', retry_message);
             initialize(retry_message)
@@ -51,14 +51,29 @@ function initialize(retry) {
     });
 }
 
-// Pre-initialize
-initialize(0)
-
 // Message from background.js
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if ('onHistoryStateUpdated' in msg) {
         initialize(0)
-        sendResponse({onHistoryStateUpdated: 'ok'})
+        sendResponse({ onHistoryStateUpdated: 'ok' })
         console.log("onHistoryStateUpdated");
     }
 });
+
+// 檢測Twitch播放器錯誤並自動重新整理
+function checkPlayerError() {
+    try {
+        const errorElement = document.querySelector('.content-overlay-gate__allow-pointers');
+        if (errorElement) {
+            location.reload();
+        }
+    } catch (err) {
+        console.error('檢查播放器錯誤時發生錯誤:', err);
+    }
+}
+
+// Pre-initialize
+initialize(0)
+// 啟動播放器錯誤定時檢測 (每10秒一次)
+setInterval(checkPlayerError, 10000);
+console.log('已啟動播放器錯誤檢測機制');
