@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
+## [3.1.2] - 2025
+
+### Added
+
+- Message頁面的Channel欄位新增點擊後開啟實況台的功能
+- 新增自動檢測圖奇播放器發生錯誤並自動點擊重整的功能
+
+### Fixed
+
+- 修復偶發揪團後，頁面重整還是待在揪團後實況台的問題
+
 ## [3.1.1] - 2025-05-02
 
 ### Fixed
