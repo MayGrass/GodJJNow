@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "JJner",
   "description": "一款為J粉而生的套件",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "permissions": [
     "storage",
     "notifications",
@@ -19,7 +19,7 @@
   "content_scripts": [
       {
         "matches": ["*://*.twitch.tv/*"],
-        "js": ["js/arrive.js", "js/points-clicker.js", "js/raid-auto-return.js"],
+        "js": ["js/arrive.js", "js/points-clicker.js", "js/raid-auto-return.js", "js/player-error-clicker.js"],
         "run_at" : "document_idle"
       }
   ],

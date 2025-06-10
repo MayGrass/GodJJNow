@@ -1,7 +1,15 @@
 [
   {
-    "version": "3.1.2",
+    "version": "3.1.3",
     "checked": true,
+    "changes": [
+    ],
+    "notes": [
+    ]
+  },
+  {
+    "version": "3.1.2",
+    "checked": false,
     "changes": [
       "Message頁面的Channel欄位新增點擊後開啟實況台的功能",
       "新增自動檢測圖奇播放器發生錯誤並自動點擊重整的功能",
