@@ -33,7 +33,7 @@ function handleChat(channel, user, message, self) {
     // 只有當說話的人是我們要監控的實況主時才處理
     if (streamers.includes(name)) {
         // 過濾掉訂閱小奇點揪團的訊息
-        var regex = /感謝.*(訂閱|小奇點|觀眾)!/g;
+        var regex = /感謝.*(訂閱|小奇點|觀眾|元)/g;
         if (regex.test(message)) {
             return;
         }
