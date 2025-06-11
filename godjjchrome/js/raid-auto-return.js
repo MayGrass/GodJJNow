@@ -6,17 +6,6 @@ let autoReturnDefaultSettings = {
     autoReturnMode: null,
 };
 
-// 輪詢相關變數
-let pollInterval = null;
-let autoReturnTimer = null;
-
-// 只在非被揪團頁面初始化 prevUrl
-const initialIsRaided = isRaidedPage();
-if (!initialIsRaided) {
-    sessionStorage.setItem('prevUrl', location.href);
-    console.log('紀錄當前URL:', location.href);
-}
-
 // 在頁面載入時先取得設定值，防止有時候揪團會出現chrome.storage undefined的錯誤
 function initSettings() {
     try {
@@ -39,18 +28,9 @@ function isRaidedPage(searchString = window.location.search) {
 
 // 檢查是否需要自動返回
 function checkAndReturnIfNeeded() {
-    if (!isRaidedPage()) {
-        stopPolling();
-        return;
-    }
+    if (!isRaidedPage()) return;
 
     console.log('被糾團到其他台:', location.href);
-
-    // 如果是被揪團頁面，啟動輪詢作為備用機制
-    if (!pollInterval) {
-        startPolling();
-    }
-
     try {
         chrome.storage.sync.get(autoReturnDefaultSettings, function (items) {
             processAutoReturn(items.autoReturnEnabled, items.autoReturnMode);
@@ -66,7 +46,6 @@ function processAutoReturn(enabled, mode) {
     const prevUrl = sessionStorage.getItem('prevUrl');
     if (!prevUrl) {
         console.log('找不到先前的URL，無法返回');
-        stopPolling(); // 出錯就停止輪詢
         return;
     }
 
@@ -78,41 +57,10 @@ function processAutoReturn(enabled, mode) {
         return;
     }
 
-    // 清除之前的計時器
-    if (autoReturnTimer) {
-        clearTimeout(autoReturnTimer);
-    }
-
     // 3秒後自動返回
-    autoReturnTimer = setTimeout(() => {
-        console.log('執行自動返回到:', prevUrl);
+    setTimeout(() => {
         window.location.href = prevUrl;
     }, 3000);
-}
-
-// 開始定時檢查（用於處理頁面非前台時的情況）
-function startPolling() {
-    if (pollInterval) return; // 避免重複啟動
-
-    console.log('開始定時檢查被揪團狀態');
-    pollInterval = setInterval(() => {
-        if (isRaidedPage()) {
-            console.log('定時檢查發現被揪團，嘗試自動返回');
-            checkAndReturnIfNeeded();
-        } else {
-            // 如果不是被揪團頁面，停止輪詢
-            stopPolling();
-        }
-    }, 2000); // 每2秒檢查一次
-}
-
-// 停止定時檢查
-function stopPolling() {
-    if (pollInterval) {
-        console.log('停止定時檢查');
-        clearInterval(pollInterval);
-        pollInterval = null;
-    }
 }
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
@@ -122,7 +70,6 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
         if (!isRaidedPage()) {
             console.log('紀錄當前URL:', location.href);
             sessionStorage.setItem('prevUrl', location.href);
-            stopPolling(); // 確保在正常頁面時停止輪詢
         }
         checkAndReturnIfNeeded();
     }
